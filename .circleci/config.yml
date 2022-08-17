@@ -13,7 +13,10 @@ jobs:
           # Commands run in the primary container
           - run:
               command: echo "text to output here" > output.txt
-
+          - persist_to_workspace:
+              root: ~/
+              paths:
+                - .
 
 workflows:
   # Name the workflow "welcome"
