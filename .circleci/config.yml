@@ -17,10 +17,19 @@ jobs:
               root: ~/
               paths:
                 - .
-
+  print_output_file:
+      docker: # executor type
+        - image: circleci/node:13.8.0 # primary container will run the latest, production-ready base image
+      steps:
+          # Commands run in the primary container
+          - attach_workspace:
+              at: ~/
+          - run:
+              command: cat output.txt
 workflows:
   # Name the workflow "welcome"
   welcome:
     # Run the welcome/run job in its own container
     jobs:
       - save_hello_world_output
+      - print_output_file
