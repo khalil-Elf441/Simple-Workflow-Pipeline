@@ -12,11 +12,11 @@ jobs:
       steps:
           # Commands run in the primary container
           - run:
-              command: echo "text to output here" > output.txt
+              command: echo "text to output here" > ~/output.txt
           - persist_to_workspace:
               root: ~/
               paths:
-                - .
+                - output.txt
   print_output_file:
       docker: # executor type
         - image: circleci/node:13.8.0 # primary container will run the latest, production-ready base image
@@ -25,7 +25,7 @@ jobs:
           - attach_workspace:
               at: ~/
           - run:
-              command: cat output.txt
+              command: cat ~/output.txt
 workflows:
   # Name the workflow "welcome"
   welcome:
